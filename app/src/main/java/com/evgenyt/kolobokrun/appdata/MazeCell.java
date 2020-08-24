@@ -1,20 +1,25 @@
 package com.evgenyt.kolobokrun.appdata;
 
+import java.util.Objects;
+
 public class MazeCell {
     private boolean wallNorth;
     private boolean wallEast;
     private boolean wallSouth;
     private boolean wallWest;
+    private final int x,y;
 
-    public MazeCell(boolean wallNorth, boolean wallEast, boolean wallSouth, boolean wallWest) {
-        this.wallNorth = wallNorth;
-        this.wallEast = wallEast;
-        this.wallSouth = wallSouth;
-        this.wallWest = wallWest;
+    public MazeCell(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public MazeCell() {
+    public int getX() {
+        return x;
+    }
 
+    public int getY() {
+        return y;
     }
 
     public boolean isWallNorth() {
@@ -47,5 +52,19 @@ public class MazeCell {
 
     public void setWallWest(boolean wallWest) {
         this.wallWest = wallWest;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MazeCell cell = (MazeCell) o;
+        return x == cell.x &&
+                y == cell.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }
