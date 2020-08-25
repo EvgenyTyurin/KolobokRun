@@ -28,22 +28,22 @@ public class Maze {
     }
 
     private void divideGenerator(int x1, int y1, int x2, int y2) {
-        if (x2 - x1 <= 1 || y2 - y1 <= 1)
+        if (x2 - x1 < 1 || y2 - y1 < 1)
             return;
         int direction = ThreadLocalRandom.current().nextInt(2);
-        if (direction == 0) {
+        if (direction == 0) { // vertical divide
             int x = ThreadLocalRandom.current().nextInt(x1 + 1, x2 + 1);
             setVerticalWall(y1, y2, x, true);
             int holeY = ThreadLocalRandom.current().nextInt(y1 + 1, y2 + 1);
-            setWallEastAt(x, holeY, false);
-            divideGenerator(x1, y1, x, y2);
+            setWallWestAt(x, holeY, false);
+            divideGenerator(x1, y1, x - 1, y2);
             divideGenerator(x, y1, x2, y2);
-        } else {
+        } else { // horizontal divide
             int y = ThreadLocalRandom.current().nextInt(y1 + 1, y2 + 1);
             setHorizontalWall(x1, x2, y, true);
             int holeX = ThreadLocalRandom.current().nextInt(x1 + 1, x2 + 1);
             setWallNorthAt(holeX, y, false);
-            divideGenerator(x1, y1, x2, y);
+            divideGenerator(x1, y1, x2, y - 1);
             divideGenerator(x1, y, x2, y2);
         }
     }

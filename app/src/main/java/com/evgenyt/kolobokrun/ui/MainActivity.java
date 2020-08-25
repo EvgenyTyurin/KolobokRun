@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppData appData = AppData.getInstance();
-        appData.createMaze(5, 10);
+        appData.createMaze(10, 14);
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         MazeView mazeView = new MazeView(this, appData,

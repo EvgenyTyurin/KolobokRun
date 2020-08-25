@@ -16,7 +16,7 @@ public class MazeView extends View {
     private Paint paintWall = new Paint();
     int scale;
     int padX = 10;
-    int padY = 30;
+    int padY = 10;
 
     public MazeView(Context context) {
         super(context);
@@ -27,7 +27,7 @@ public class MazeView extends View {
         this.appData = appData;
         maze = appData.getMaze();
         int scale1 = (screenWidth - (padX * 2)) / maze.getWidth();
-        int scale2 = (screenHeight - (padY * 2)) / maze.getHeight();
+        int scale2 = (screenHeight - (padY * 2) - 150) / maze.getHeight();
         scale = Math.min(scale1, scale2);
     }
 
