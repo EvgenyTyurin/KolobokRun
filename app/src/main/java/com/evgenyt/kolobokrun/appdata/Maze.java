@@ -6,6 +6,12 @@ public class Maze {
     private final int width;
     private final int height;
     private final MazeCell[][] cells;
+    private int playerX = 0;
+    private int playerY = 0;
+
+    public enum Direction {
+        NORTH, EAST, SOUTH, WEST
+    }
 
     public Maze(int width, int height) {
         this.width = width;
@@ -25,6 +31,35 @@ public class Maze {
             cells[width - 1][y].setWallEast(true);
         }
         divideGenerator(0, 0, width - 1, height - 1);
+    }
+
+    public boolean movePlayer(Direction direction) {
+        boolean canGo = false;
+        int dx = 0;
+        int dy = 0;
+        switch (direction) {
+            case EAST:
+                canGo = !cells[playerX][playerY].isWallEast();
+                dx = 1;
+                break;
+            case WEST:
+                canGo = !cells[playerX][playerY].isWallWest();
+                dx = -1;
+                break;
+            case NORTH:
+                canGo = !cells[playerX][playerY].isWallNorth();
+                dy = -1;
+                break;
+            case SOUTH:
+                canGo = !cells[playerX][playerY].isWallSouth();
+                dy = 1;
+                break;
+        }
+        if (canGo) {
+            playerX += dx;
+            playerY += dy;
+        }
+        return canGo;
     }
 
     private void divideGenerator(int x1, int y1, int x2, int y2) {
@@ -106,5 +141,21 @@ public class Maze {
 
     public MazeCell[][] getCells() {
         return cells;
+    }
+
+    public int getPlayerX() {
+        return playerX;
+    }
+
+    public void setPlayerX(int playerX) {
+        this.playerX = playerX;
+    }
+
+    public int getPlayerY() {
+        return playerY;
+    }
+
+    public void setPlayerY(int playerY) {
+        this.playerY = playerY;
     }
 }
